@@ -1,0 +1,1913 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BỘ ĐỀ ÔN IOE K8 SỐ: 02.1</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .word-block {
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        audio {
+            filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) brightness(90%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased text-gray-800">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // --- DỮ LIỆU CÂU HỎI IOE LỚP 8 (ĐỀ SỐ 02.1) ---
+        const questions = [
+            {
+                type: 'fill-in-the-blank',
+                question: '1. By ____ was this story written?',
+                correctAnswer: 'whom',
+                correctAnswer_vi: 'ai',
+                hint_vi: 'Đại từ quan hệ chỉ người, đóng vai trò tân ngữ của giới từ "By". (4 ký tự)',
+                rationale_vi: 'Trong câu hỏi trang trọng, khi một đại từ làm tân ngữ của giới từ (By), chúng ta dùng "whom". "By whom" có nghĩa là "bởi ai".',
+                rationale_en: 'In formal questions, when a pronoun is the object of a preposition (By), we use "whom". "By whom" means "by which person".'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '2. I went out with some friends on ________.',
+                correctAnswer: 'Saturday',
+                correctAnswer_vi: 'Thứ Bảy',
+                hint_vi: 'Một ngày cuối tuần. (8 ký tự)',
+                rationale_vi: '"On" là giới từ được dùng với các ngày trong tuần, ví dụ: on Monday, on Saturday.',
+                rationale_en: 'The preposition "on" is used with days of the week, for example: on Monday, on Saturday.'
+            },
+            {
+                type: 'rearrange',
+                question: '3. were you, / I would / call and / If I / apologize./',
+                words: ['If I', 'were you,', 'I would', 'call and', 'apologize.'],
+                correctAnswer: 'If I were you, I would call and apologize.',
+                correctAnswer_vi: 'Nếu tôi là bạn, tôi sẽ gọi và xin lỗi.',
+                hint_vi: 'Đây là câu điều kiện loại 2, dùng để đưa ra lời khuyên.',
+                rationale_vi: 'Cấu trúc câu điều kiện loại 2 dùng để đưa ra lời khuyên: If I were you, I would + V (nguyên thể).',
+                rationale_en: 'Conditional sentence type 2 structure for giving advice: If I were you, I would + V (infinitive).'
+            },
+            {
+                type: 'mc',
+                question: '4. She went to market without … anything.',
+                options: [
+                    { text: 'A. buy', isCorrect: false },
+                    { text: 'B. to buy', isCorrect: false },
+                    { text: 'C. bought', isCorrect: false },
+                    { text: 'D. buying', isCorrect: true }
+                ],
+                correctAnswer: 'D. buying',
+                correctAnswer_vi: 'mua',
+                hint_vi: 'Sau giới từ "without", động từ ở dạng V-ing.',
+                rationale_vi: 'Sau các giới từ (in, on, at, without, after, before, ...), động từ phải ở dạng danh động từ (V-ing).',
+                rationale_en: 'After prepositions (in, on, at, without, after, before, ...), the verb must be in the gerund form (V-ing).'
+            },
+            {
+                type: 'mc',
+                question: '5. Someone is knocking … the door.',
+                options: [
+                    { text: 'A. in', isCorrect: false },
+                    { text: 'B. at', isCorrect: true },
+                    { text: 'C. over', isCorrect: false },
+                    { text: 'D. out', isCorrect: false }
+                ],
+                correctAnswer: 'B. at',
+                correctAnswer_vi: 'vào',
+                hint_vi: 'Cụm từ "knock at the door".',
+                rationale_vi: 'Cụm động từ cố định "to knock at/on the door" có nghĩa là "gõ cửa".',
+                rationale_en: 'The fixed phrasal verb "to knock at/on the door" means to rap on a door.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '6. I need a ____ dresser. I haven’t been to the barber’s recently.',
+                correctAnswer: 'hair',
+                correctAnswer_vi: 'tóc',
+                hint_vi: 'A hair dresser is a person who cuts hair. (4 ký tự)',
+                rationale_vi: '"Hairdresser" là thợ làm tóc. "Barber" là thợ cắt tóc nam.',
+                rationale_en: 'A "hairdresser" is a person who cuts and styles hair. A "barber" typically cuts men\'s hair.'
+            },
+            {
+                type: 'mc',
+                question: '7. Sharp knives are actually safer to use ….',
+                options: [
+                    { text: 'A. as dull ones', isCorrect: false },
+                    { text: 'B. as ones that are dull', isCorrect: false },
+                    { text: 'C. that are dull ones', isCorrect: false },
+                    { text: 'D. than dull ones', isCorrect: true }
+                ],
+                correctAnswer: 'D. than dull ones',
+                correctAnswer_vi: 'hơn những con dao cùn',
+                hint_vi: 'Đây là câu so sánh hơn với tính từ ngắn "safer".',
+                rationale_vi: 'Cấu trúc so sánh hơn: S1 + be + adj-er + than + S2. "Safer" là dạng so sánh hơn của "safe".',
+                rationale_en: 'Comparative structure: S1 + be + adj-er + than + S2. "Safer" is the comparative form of "safe".'
+            },
+            {
+                type: 'mc',
+                question: '8. They work hard ... they might be well prepared for the examination.',
+                options: [
+                    { text: 'A. because', isCorrect: false },
+                    { text: 'B. since', isCorrect: false },
+                    { text: 'C. then', isCorrect: false },
+                    { text: 'D. so that', isCorrect: true }
+                ],
+                correctAnswer: 'D. so that',
+                correctAnswer_vi: 'để mà',
+                hint_vi: 'Liên từ chỉ mục đích.',
+                rationale_vi: '"So that" là liên từ dùng để giới thiệu mệnh đề chỉ mục đích (clause of purpose).',
+                rationale_en: '"So that" is a conjunction used to introduce a clause of purpose.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '9. Don’t you believe in equality between ___ and women?',
+                correctAnswer: 'men',
+                correctAnswer_vi: 'đàn ông',
+                hint_vi: 'Đối lập với "women". (3 ký tự)',
+                rationale_vi: '"Men" (đàn ông) và "women" (phụ nữ) là hai giới tính chính. "Equality" là sự bình đẳng.',
+                rationale_en: '"Men" and "women" are the two main genders. "Equality" is the state of being equal.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '10. The car alarm ____ me up at 6:00 yesterday morning.',
+                correctAnswer: 'woke',
+                correctAnswer_vi: 'đánh thức',
+                hint_vi: 'Cụm động từ "wake someone up" (đánh thức ai đó) ở thì quá khứ. (4 ký tự)',
+                rationale_vi: 'Hành động xảy ra vào "yesterday morning" nên ta dùng thì quá khứ đơn. Dạng quá khứ của "wake" là "woke".',
+                rationale_en: 'The action happened "yesterday morning", so we use the simple past tense. The past form of "wake" is "woke".'
+            },
+            {
+                type: 'rearrange',
+                question: '11. people find it/ Smoking/ is unhealthy/ but lots of/ difficult to stop./',
+                words: ['Smoking', 'is unhealthy', 'but lots of', 'people find it', 'difficult to stop.'],
+                correctAnswer: 'Smoking is unhealthy but lots of people find it difficult to stop.',
+                correctAnswer_vi: 'Hút thuốc không tốt cho sức khỏe nhưng rất nhiều người cảm thấy khó bỏ.',
+                hint_vi: 'Hai mệnh đề tương phản được nối bằng "but".',
+                rationale_vi: 'Đây là một câu ghép, sử dụng liên từ "but" để nối hai mệnh đề có ý nghĩa trái ngược nhau.',
+                rationale_en: 'This is a compound sentence using the conjunction "but" to connect two contrasting clauses.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '12. We are taking our evening w__k at the moment.',
+                correctAnswer: 'al',
+                correctAnswer_vi: 'al (để hoàn thành "walk")',
+                hint_vi: 'Từ có nghĩa là "cuộc đi bộ". (2 ký tự)',
+                rationale_vi: 'Từ cần hoàn thành là "walk" (cuộc đi bộ). Cụm từ "take a walk" nghĩa là đi dạo.',
+                rationale_en: 'The word to complete is "walk". The phrase "take a walk" means to go for a stroll.'
+            },
+            {
+                type: 'mc',
+                question: '13. In the world, tons of used papers ... away everyday.',
+                options: [
+                    { text: 'A. thrown', isCorrect: false },
+                    { text: 'B. are thrown', isCorrect: true },
+                    { text: 'C. is thrown', isCorrect: false },
+                    { text: 'D. threw', isCorrect: false }
+                ],
+                correctAnswer: 'B. are thrown',
+                correctAnswer_vi: 'bị vứt đi',
+                hint_vi: 'Câu bị động ở thì hiện tại đơn, chủ ngữ là "tons of used papers" (số nhiều).',
+                rationale_vi: 'Chủ ngữ "tons of used papers" là số nhiều, và hành động "throw away" là bị động. Vì vậy, ta dùng cấu trúc bị động thì hiện tại đơn: S + are + V3/ed.',
+                rationale_en: 'The subject "tons of used papers" is plural, and the action "throw away" is passive. Therefore, we use the simple present passive structure: S + are + V3/ed.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '14. As a se______ man, Henry always looks calm and makes a wise decision.',
+                correctAnswer: 'nsible',
+                correctAnswer_vi: 'nsible (để hoàn thành "sensible")',
+                hint_vi: 'Tính từ có nghĩa là "khôn ngoan, hợp lý". (6 ký tự)',
+                rationale_vi: 'Từ cần hoàn thành là "sensible", có nghĩa là người có khả năng phán đoán tốt, hợp lý và thực tế.',
+                rationale_en: 'The word to complete is "sensible", meaning having or showing good judgment; reasonable and practical.'
+            },
+            {
+                type: 'multimedia',
+                question: '15. In industry, most glass is ________.',
+                mediaType: 'audio',
+                mediaSource: 'https://res.ioe.vn/edu/EOlympic/ExamData/ImageExam/2017/1/13/636199061421403348_Audio.mp3',
+                correctAnswer: 'recycled',
+                correctAnswer_vi: 'được tái chế',
+                hint_vi: 'Từ này có nghĩa là "tái chế". (8 ký tự)',
+                rationale_vi: 'Đoạn audio nói về việc tái chế thủy tinh trong công nghiệp. "Recycled" là "được tái chế".',
+                rationale_en: 'The audio talks about recycling glass in the industry. "Recycled" means to be converted into reusable material.'
+            },
+            {
+                type: 'rearrange',
+                question: '16. kind/ help me./ of you/ to/ It’s very/',
+                words: ['It’s very', 'kind', 'of you', 'to', 'help me.'],
+                correctAnswer: 'It’s very kind of you to help me.',
+                correctAnswer_vi: 'Bạn thật tốt bụng khi giúp tôi.',
+                hint_vi: 'Cấu trúc "It\'s very kind of you to do something".',
+                rationale_vi: 'Đây là cấu trúc dùng để khen ngợi ai đó về hành động của họ: It\'s + adj + of + somebody + to V.',
+                rationale_en: 'This is a structure used to compliment someone on their action: It\'s + adj + of + somebody + to V.'
+            },
+            {
+                type: 'rearrange',
+                question: '17. central London./ is a/ very large/ Hyde Park/ park in/',
+                words: ['Hyde Park', 'is a', 'very large', 'park in', 'central London.'],
+                correctAnswer: 'Hyde Park is a very large park in central London.',
+                correctAnswer_vi: 'Hyde Park là một công viên rất lớn ở trung tâm London.',
+                hint_vi: 'Bắt đầu câu với tên riêng "Hyde Park".',
+                rationale_vi: 'Trật tự câu cơ bản: Subject (Hyde Park) + Verb (is) + Complement (a very large park in central London).',
+                rationale_en: 'Basic sentence order: Subject (Hyde Park) + Verb (is) + Complement (a very large park in central London).'
+            },
+            {
+                type: 'mc',
+                question: '18. 12-year-old Touch Pavchhay wants ____ a mobile app that makes education fun and easy.',
+                options: [
+                    { text: 'A. designing', isCorrect: false },
+                    { text: 'B. to design', isCorrect: true },
+                    { text: 'C. and designs', isCorrect: false },
+                    { text: 'D. designed', isCorrect: false }
+                ],
+                correctAnswer: 'B. to design',
+                correctAnswer_vi: 'thiết kế',
+                hint_vi: 'Sau động từ "want", ta dùng "to V".',
+                rationale_vi: 'Cấu trúc: S + want + to V (nguyên thể). "Want to do something" có nghĩa là muốn làm gì đó.',
+                rationale_en: 'Structure: S + want + to V (infinitive). "Want to do something" means to have a desire to do something.'
+            },
+            {
+                type: 'rearrange',
+                question: '19. accessible than ever before./ facilities/ easily/ Medical/ are more/',
+                words: ['Medical', 'facilities', 'are more', 'easily', 'accessible than ever before.'],
+                correctAnswer: 'Medical facilities are more easily accessible than ever before.',
+                correctAnswer_vi: 'Các cơ sở y tế dễ dàng tiếp cận hơn bao giờ hết.',
+                hint_vi: 'Trạng từ "easily" đứng trước tính từ "accessible".',
+                rationale_vi: 'Cấu trúc so sánh hơn với tính từ dài: S + be + more + (adv) + adj + than...',
+                rationale_en: 'Comparative structure with long adjectives: S + be + more + (adv) + adj + than...'
+            },
+            {
+                type: 'rearrange',
+                question: '20. we / us / Our teacher asked / worried about./ were most / what /',
+                words: ['Our teacher asked', 'us', 'what', 'we', 'were most', 'worried about.'],
+                correctAnswer: 'Our teacher asked us what we were most worried about.',
+                correctAnswer_vi: 'Giáo viên hỏi chúng tôi lo lắng nhất về điều gì.',
+                hint_vi: 'Đây là câu tường thuật của một câu hỏi Wh-.',
+                rationale_vi: 'Trong câu tường thuật dạng câu hỏi Wh-, trật tự từ trong mệnh đề phụ giống câu trần thuật (S+V) và không đảo ngữ.',
+                rationale_en: 'In a reported Wh-question, the word order in the subordinate clause is like a statement (S+V) with no inversion.'
+            },
+            {
+                type: 'rearrange',
+                question: '21. of her/ carelessness./ glass because/ Mai/ broke the/',
+                words: ['Mai', 'broke the', 'glass because', 'of her', 'carelessness.'],
+                correctAnswer: 'Mai broke the glass because of her carelessness.',
+                correctAnswer_vi: 'Mai đã làm vỡ cái ly vì sự bất cẩn của cô ấy.',
+                hint_vi: 'Sau "because of" là một cụm danh từ.',
+                rationale_vi: '"Because of" là một giới từ, theo sau là một danh từ hoặc cụm danh từ để chỉ nguyên nhân. "Because" là liên từ, theo sau là một mệnh đề.',
+                rationale_en: '"Because of" is a preposition followed by a noun or noun phrase to show reason. "Because" is a conjunction followed by a clause.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '22. Veronica: Guess what? I’m going to Hue City next week. - Mi: That’s great! Are you _______?',
+                correctAnswer: 'excited',
+                correctAnswer_vi: 'hào hứng',
+                hint_vi: 'Tính từ chỉ cảm giác hào hứng, phấn khích. (7 ký tự)',
+                rationale_vi: '"Excited" là một tính từ dùng để miêu tả cảm xúc vui mừng và háo hức về một điều gì đó sắp xảy ra.',
+                rationale_en: '"Excited" is an adjective used to describe feeling very happy and enthusiastic about something that is going to happen.'
+            },
+            {
+                type: 'rearrange',
+                question: '23. in the/ computer industry./ important person/ is a very/ Bill Gates/',
+                words: ['Bill Gates', 'is a very', 'important person', 'in the', 'computer industry.'],
+                correctAnswer: 'Bill Gates is a very important person in the computer industry.',
+                correctAnswer_vi: 'Bill Gates là một người rất quan trọng trong ngành công nghiệp máy tính.',
+                hint_vi: 'Bắt đầu câu với tên riêng "Bill Gates".',
+                rationale_vi: 'Trật tự câu cơ bản: Subject (Bill Gates) + Verb (is) + Complement (a very important person...).',
+                rationale_en: 'Basic sentence order: Subject (Bill Gates) + Verb (is) + Complement (a very important person...).'
+            },
+            {
+                type: 'mc',
+                question: '24. Grocery store is a place where people can ….',
+                options: [
+                    { text: 'A. buy drugs', isCorrect: false },
+                    { text: 'B. buy food and small things', isCorrect: true },
+                    { text: 'C. buy stamps and send letters', isCorrect: false },
+                    { text: 'D. take a rest', isCorrect: false }
+                ],
+                correctAnswer: 'B. buy food and small things',
+                correctAnswer_vi: 'mua thực phẩm và những thứ nhỏ nhặt',
+                hint_vi: '"Grocery store" là cửa hàng tạp hóa.',
+                rationale_vi: 'Một cửa hàng tạp hóa (grocery store) là nơi bán thực phẩm và các mặt hàng gia dụng nhỏ.',
+                rationale_en: 'A grocery store is a shop that sells food and small household goods.'
+            },
+            {
+                type: 'rearrange',
+                question: '25. bus near my / house and then / bus stop to school./ walk from the / I catch the /',
+                words: ['I catch the', 'bus near my', 'house and then', 'walk from the', 'bus stop to school.'],
+                correctAnswer: 'I catch the bus near my house and then walk from the bus stop to school.',
+                correctAnswer_vi: 'Tôi bắt xe buýt gần nhà và sau đó đi bộ từ trạm xe buýt đến trường.',
+                hint_vi: 'Câu mô tả một chuỗi hành động.',
+                rationale_vi: 'Câu này mô tả hai hành động nối tiếp nhau, sử dụng "and then" để nối chúng lại.',
+                rationale_en: 'This sentence describes two sequential actions, using "and then" to connect them.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '26. You have to ___ a deposit if you want to use the motorbike.',
+                correctAnswer: 'pay',
+                correctAnswer_vi: 'trả',
+                hint_vi: 'Cụm từ "pay a deposit" có nghĩa là "đặt cọc". (3 ký tự)',
+                rationale_vi: 'Cụm từ cố định "pay a deposit" có nghĩa là trả một khoản tiền đặt cọc để đảm bảo cho việc thuê mượn một thứ gì đó.',
+                rationale_en: 'The fixed phrase "pay a deposit" means to give an amount of money as a down payment or security for an item being rented.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '27. Our environment is becoming ____ and more polluted.',
+                correctAnswer: 'more',
+                correctAnswer_vi: 'ngày càng',
+                hint_vi: 'Cấu trúc so sánh kép "more and more + adj".',
+                rationale_vi: 'Cấu trúc "more and more + tính từ dài" được dùng để diễn tả một sự thay đổi đang ngày càng tăng lên.',
+                rationale_en: 'The structure "more and more + long adjective" is used to describe a continuously increasing change.'
+            },
+            {
+                type: 'rearrange',
+                question: '28. Yellowstone / United States’ / national park./ most famous / is the /',
+                words: ['Yellowstone', 'is the', 'United States’', 'most famous', 'national park.'],
+                correctAnswer: 'Yellowstone is the United States’ most famous national park.',
+                correctAnswer_vi: 'Yellowstone là công viên quốc gia nổi tiếng nhất của Hoa Kỳ.',
+                hint_vi: 'Cấu trúc so sánh nhất "the most famous".',
+                rationale_vi: 'Trật tự câu: Subject (Yellowstone) + Verb (is) + Superlative phrase (the United States’ most famous national park).',
+                rationale_en: 'Sentence order: Subject (Yellowstone) + Verb (is) + Superlative phrase (the United States’ most famous national park).'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '29. Columbus discovered America in the 15th _______.',
+                correctAnswer: 'century',
+                correctAnswer_vi: 'thế kỷ',
+                hint_vi: 'Một khoảng thời gian 100 năm. (7 ký tự)',
+                rationale_vi: '"Century" là một thế kỷ, một giai đoạn 100 năm. Thế kỷ 15 là từ năm 1401 đến 1500.',
+                rationale_en: 'A "century" is a period of 100 years. The 15th century was from 1401 to 1500.'
+            },
+            {
+                type: 'mc',
+                question: '30. Can you give me …?',
+                options: [
+                    { text: 'A. a ride', isCorrect: true },
+                    { text: 'B. a drive', isCorrect: false },
+                    { text: 'C. riding', isCorrect: false },
+                    { text: 'D. driving', isCorrect: false }
+                ],
+                correctAnswer: 'A. a ride',
+                correctAnswer_vi: 'một chuyến đi nhờ',
+                hint_vi: 'Cụm từ "give someone a ride" có nghĩa là "cho ai đi nhờ xe".',
+                rationale_vi: '"To give someone a ride" là một thành ngữ có nghĩa là cho phép ai đó đi cùng xe của bạn đến một nơi nào đó.',
+                rationale_en: '"To give someone a ride" is an idiom that means to let someone travel in your vehicle to a destination.'
+            },
+            {
+                type: 'multimedia',
+                question: '31. What is the boy with black hair doing?',
+                mediaType: 'image',
+                imagePrompt: 'Một cậu bé tóc đen đang xếp 5 cái nĩa lên bàn',
+                mediaSource: 'https://placehold.co/566x320/EFEFEF/333333?text=Boy+laying+five+forks',
+                options: [
+                    { text: 'A. Laying five forks on the table.', isCorrect: true },
+                    { text: 'B. Laying nine forks on the table.', isCorrect: false },
+                    { text: 'C. Laying five knives on the tables.', isCorrect: false },
+                    { text: 'D. Laying knives and forks on the table.', isCorrect: false }
+                ],
+                correctAnswer: 'A. Laying five forks on the table.',
+                correctAnswer_vi: 'Đặt năm cái nĩa lên bàn.',
+                hint_vi: 'Nhìn vào hình ảnh và chọn mô tả chính xác.',
+                rationale_vi: 'Bức ảnh (giả định) cho thấy một cậu bé đang đặt 5 cái nĩa lên bàn.',
+                rationale_en: 'The (mock-up) picture shows a boy laying five forks on the table.'
+            },
+            {
+                type: 'rearrange',
+                question: '32. Read the user’s/ it will give you/ manual carefully;/ useful information./ a lot of/',
+                words: ['Read the user’s', 'manual carefully;', 'it will give you', 'a lot of', 'useful information.'],
+                correctAnswer: 'Read the user’s manual carefully; it will give you a lot of useful information.',
+                correctAnswer_vi: 'Hãy đọc kỹ hướng dẫn sử dụng; nó sẽ cung cấp cho bạn rất nhiều thông tin hữu ích.',
+                hint_vi: 'Hai mệnh đề độc lập được nối bằng dấu chấm phẩy (;).',
+                rationale_vi: 'Mệnh đề đầu tiên là một câu mệnh lệnh. Mệnh đề thứ hai giải thích kết quả. Chúng có thể được nối bằng dấu chấm phẩy.',
+                rationale_en: 'The first clause is an imperative sentence. The second clause explains the result. They can be joined by a semicolon.'
+            },
+            {
+                type: 'mc',
+                question: '33. He … for himself.',
+                options: [
+                    { text: 'A. very set difficult standards', isCorrect: false },
+                    { text: 'B. set very difficult standards', isCorrect: true },
+                    { text: 'C. set difficult very standards', isCorrect: false },
+                    { text: 'D. very difficult set standards', isCorrect: false }
+                ],
+                correctAnswer: 'B. set very difficult standards',
+                correctAnswer_vi: 'đặt ra những tiêu chuẩn rất khó khăn',
+                hint_vi: 'Trật tự đúng: Verb + Adverb + Adjective + Noun.',
+                rationale_vi: 'Trật tự đúng của các từ trong cụm này là: động từ (set) + trạng từ (very) + tính từ (difficult) + danh từ (standards).',
+                rationale_en: 'The correct word order for this phrase is: verb (set) + adverb (very) + adjective (difficult) + noun (standards).'
+            },
+            {
+                type: 'mc',
+                question: '34. The cold “cures” don’t cure a cold, but they ... the symptoms.',
+                options: [
+                    { text: 'A. prevent', isCorrect: false },
+                    { text: 'B. relieve', isCorrect: true },
+                    { text: 'C. help', isCorrect: false },
+                    { text: 'D. bring', isCorrect: false }
+                ],
+                correctAnswer: 'B. relieve',
+                correctAnswer_vi: 'làm giảm',
+                hint_vi: 'Từ này có nghĩa là làm cho một vấn đề hoặc cảm giác khó chịu trở nên bớt nghiêm trọng.',
+                rationale_vi: '"Relieve" có nghĩa là làm giảm bớt (cơn đau, triệu chứng). Các loại thuốc cảm lạnh giúp làm giảm các triệu chứng chứ không chữa khỏi bệnh.',
+                rationale_en: '"Relieve" means to make an unpleasant feeling or problem less severe. Cold medicines help relieve symptoms but do not cure the cold.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '35. Add sugar, water and flour to the beaten eggs and ____ the mixture well.',
+                correctAnswer: 'mix',
+                correctAnswer_vi: 'trộn',
+                hint_vi: 'Hành động kết hợp các thành phần lại với nhau. (3 ký tự)',
+                rationale_vi: '"Mix" có nghĩa là trộn lẫn, kết hợp các chất khác nhau lại với nhau.',
+                rationale_en: '"Mix" means to combine different substances together.'
+            },
+            {
+                type: 'multimedia',
+                question: '36. Where did neighbours gather after dinner?',
+                mediaType: 'audio',
+                mediaSource: 'https://placehold.co/1/FF0000/FFFFFF?text=Audio',
+                imagePrompt: 'Giả sử đoạn audio mô tả thời kỳ đầu của TV, khi hàng xóm tụ tập xem chung.',
+                options: [
+                    { text: 'A. Both inside and outside the TV owners’ houses', isCorrect: true },
+                    { text: 'B. Both inside and outside the neighbours’ houses', isCorrect: false },
+                    { text: 'C. Only outside the house', isCorrect: false },
+                    { text: 'D. Only inside the house', isCorrect: false }
+                ],
+                correctAnswer: 'A. Both inside and outside the TV owners’ houses',
+                correctAnswer_vi: 'Cả trong và ngoài nhà của những người sở hữu TV',
+                hint_vi: 'Vào thời kỳ đầu, TV rất hiếm.',
+                rationale_vi: 'Trong những ngày đầu của truyền hình, một chiếc TV là một vật hiếm và đắt tiền. Hàng xóm thường tụ tập tại nhà của người sở hữu TV để xem, và nếu nhà quá đông, họ sẽ xem từ bên ngoài qua cửa sổ.',
+                rationale_en: 'In the early days of television, a TV set was a rare and expensive item. Neighbors would often gather at the TV owner\'s house to watch, and if it was too crowded, they would watch from outside through the windows.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '37. How often do your parents __ camping? – Every weekend.',
+                correctAnswer: 'go',
+                correctAnswer_vi: 'đi',
+                hint_vi: 'Cụm từ "go camping". (2 ký tự)',
+                rationale_vi: 'Cụm động từ "go camping" có nghĩa là đi cắm trại. Đây là một cụm từ cố định.',
+                rationale_en: 'The phrasal verb "go camping" means to go on a camping trip. It is a fixed collocation.'
+            },
+            {
+                type: 'multimedia',
+                question: '38. My little daughter is looking at herself in the ______.',
+                mediaType: 'image',
+                imagePrompt: 'Một cô bé đang soi gương.',
+                mediaSource: 'https://placehold.co/566x320/EFEFEF/333333?text=Girl+in+a+mirror',
+                correctAnswer: 'mirror',
+                correctAnswer_vi: 'gương',
+                hint_vi: 'Một bề mặt phản chiếu hình ảnh. (6 ký tự)',
+                rationale_vi: 'A "mirror" is a surface, typically of glass coated with a metal amalgam, which reflects a clear image.',
+                rationale_en: 'Một "cái gương" là một bề mặt, thường là thủy tinh được tráng một lớp hỗn hống kim loại, phản chiếu một hình ảnh rõ nét.'
+            },
+            {
+                type: 'mc',
+                question: '39. Choose the word that has the underlined part pronounced differently.',
+                options: [
+                    { text: 'A. fl<u>oa</u>t', isCorrect: false },
+                    { text: 'B. abr<u>oa</u>d', isCorrect: true },
+                    { text: 'C. t<u>oa</u>d', isCorrect: false },
+                    { text: 'D. c<u>oa</u>st', isCorrect: false }
+                ],
+                correctAnswer: 'B. abroad',
+                correctAnswer_vi: 'abroad',
+                hint_vi: 'Tìm từ có nguyên âm "oa" được phát âm là /ɔː/ thay vì /oʊ/.',
+                rationale_vi: 'Trong "abroad", "oa" được phát âm là /ɔː/ (âm o dài). Trong các từ còn lại, "oa" được phát âm là /oʊ/.',
+                rationale_en: 'In "abroad", "oa" is pronounced /ɔː/ (long o sound). In the other words, "oa" is pronounced /oʊ/.'
+            },
+            {
+                type: 'mc',
+                question: '40. About 60% of the world’s radio stations broadcast ... English.',
+                options: [
+                    { text: 'A. by', isCorrect: false },
+                    { text: 'B. with', isCorrect: false },
+                    { text: 'C. of', isCorrect: false },
+                    { text: 'D. in', isCorrect: true }
+                ],
+                correctAnswer: 'D. in',
+                correctAnswer_vi: 'bằng',
+                hint_vi: 'Giới từ dùng để chỉ ngôn ngữ được sử dụng.',
+                rationale_vi: 'Giới từ "in" được dùng để chỉ ngôn ngữ mà một cái gì đó được viết hoặc nói (e.g., a book in English, a song in Vietnamese).',
+                rationale_en: 'The preposition "in" is used to indicate the language in which something is written or spoken (e.g., a book in English, a song in Vietnamese).'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '41. ____ do you like best about your school?',
+                correctAnswer: 'What',
+                correctAnswer_vi: 'Cái gì',
+                hint_vi: 'Từ để hỏi về sự vật, sự việc. (4 ký tự)',
+                rationale_vi: '"What" là từ để hỏi được dùng để hỏi thông tin về một điều gì đó.',
+                rationale_en: '"What" is a question word used to ask for information about something.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '42. A _______ is a building or a room where people can go to look at paintings.',
+                correctAnswer: 'gallery',
+                correctAnswer_vi: 'phòng trưng bày',
+                hint_vi: 'Nơi trưng bày các tác phẩm nghệ thuật. (7 ký tự)',
+                rationale_vi: 'A "gallery" (phòng trưng bày nghệ thuật) là nơi trưng bày các tác phẩm nghệ thuật như tranh vẽ, tượng điêu khắc.',
+                rationale_en: 'An art "gallery" is a place where works of art such as paintings and sculptures are displayed.'
+            },
+            {
+                type: 'rearrange',
+                question: '43. His / that he should / do his homework more / teacher said / carefully./',
+                words: ['His', 'teacher said', 'that he should', 'do his homework more', 'carefully.'],
+                correctAnswer: 'His teacher said that he should do his homework more carefully.',
+                correctAnswer_vi: 'Giáo viên của anh ấy nói rằng anh ấy nên làm bài tập về nhà cẩn thận hơn.',
+                hint_vi: 'Đây là câu tường thuật một lời khuyên.',
+                rationale_vi: 'Cấu trúc câu tường thuật: S + said + (that) + S + should + V. Trạng từ "carefully" bổ nghĩa cho động từ "do".',
+                rationale_en: 'Reported speech structure: S + said + (that) + S + should + V. The adverb "carefully" modifies the verb "do".'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '44. I always drive ____ the post office on my way to work.',
+                correctAnswer: 'past',
+                correctAnswer_vi: 'ngang qua',
+                hint_vi: 'Giới từ chỉ sự di chuyển ngang qua một địa điểm. (4 ký tự)',
+                rationale_vi: '"Past" là một giới từ có nghĩa là đi từ một bên của một cái gì đó sang bên kia; đi ngang qua.',
+                rationale_en: '"Past" as a preposition means going from one side of something to the other; to go by.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '45. I _____ if she could speak English.',
+                correctAnswer: 'asked',
+                correctAnswer_vi: 'đã hỏi',
+                hint_vi: 'Động từ chỉ hành động hỏi. (5 ký tự)',
+                rationale_vi: 'Đây là câu tường thuật của một câu hỏi Yes/No. Cấu trúc: S + asked + if/whether + S + V (lùi thì).',
+                rationale_en: 'This is a reported Yes/No question. Structure: S + asked + if/whether + S + V (backshifted).'
+            },
+            {
+                type: 'mc',
+                question: '46. By learning English, you can get access to the world’s ....',
+                options: [
+                    { text: 'A. develop', isCorrect: false },
+                    { text: 'B. developing', isCorrect: false },
+                    { text: 'C. development', isCorrect: true },
+                    { text: 'D. developed', isCorrect: false }
+                ],
+                correctAnswer: 'C. development',
+                correctAnswer_vi: 'sự phát triển',
+                hint_vi: 'Cần một danh từ sau sở hữu cách "world\'s".',
+                rationale_vi: 'Sau sở hữu cách (’s), chúng ta cần một danh từ. "Development" (sự phát triển) là danh từ phù hợp trong ngữ cảnh này.',
+                rationale_en: 'After a possessive (\'s), we need a noun. "Development" is the appropriate noun in this context.'
+            },
+            {
+                type: 'mc',
+                question: '47. He always ….',
+                options: [
+                    { text: 'A. avoids to meet me', isCorrect: false },
+                    { text: 'B. avoiding to meet me', isCorrect: false },
+                    { text: 'C. avoids meeting me', isCorrect: true },
+                    { text: 'D. to avoid meeting me', isCorrect: false }
+                ],
+                correctAnswer: 'C. avoids meeting me',
+                correctAnswer_vi: 'tránh gặp tôi',
+                hint_vi: 'Sau động từ "avoid", ta dùng động từ ở dạng V-ing.',
+                rationale_vi: 'Động từ "avoid" được theo sau bởi một danh động từ (V-ing). Cấu trúc: avoid + V-ing.',
+                rationale_en: 'The verb "avoid" is followed by a gerund (V-ing). Structure: avoid + V-ing.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '48. We sometimes ____ our relatives of friends greeting cards on special occasions.',
+                correctAnswer: 'send',
+                correctAnswer_vi: 'gửi',
+                hint_vi: 'Hành động gửi thư hoặc bưu thiếp. (4 ký tự)',
+                rationale_vi: 'Cấu trúc: send somebody something. "Send" có nghĩa là gửi.',
+                rationale_en: 'Structure: send somebody something. "Send" means to cause something to go from one place to another.'
+            },
+            {
+                type: 'mc',
+                question: '49. Choose the word that has the underlined part pronounced differently.',
+                options: [
+                    { text: 'A. st<u>a</u>y', isCorrect: false },
+                    { text: 'B. s<u>a</u>y', isCorrect: false },
+                    { text: 'C. m<u>a</u>y', isCorrect: false },
+                    { text: 'D. c<u>a</u>n', isCorrect: true }
+                ],
+                correctAnswer: 'D. can',
+                correctAnswer_vi: 'can',
+                hint_vi: 'Tìm từ có chữ "a" được phát âm là /æ/ thay vì /eɪ/.',
+                rationale_vi: 'Trong "can", chữ "a" được phát âm là /æ/. Trong các từ còn lại, "ay" được phát âm là /eɪ/.',
+                rationale_en: 'In "can", the letter "a" is pronounced /æ/. In the other words, "ay" is pronounced /eɪ/.'
+            },
+            {
+                type: 'mc',
+                question: '50. Binh and I ... anywhere last weekend.',
+                options: [
+                    { text: 'A. don’t go', isCorrect: false },
+                    { text: 'B. didn’t go', isCorrect: true },
+                    { text: 'C. wasn’t go', isCorrect: false },
+                    { text: 'D. haven’t gone', isCorrect: false }
+                ],
+                correctAnswer: 'B. didn’t go',
+                correctAnswer_vi: 'đã không đi',
+                hint_vi: 'Câu có "last weekend", là dấu hiệu của thì quá khứ đơn.',
+                rationale_vi: '"Last weekend" chỉ một thời điểm đã kết thúc trong quá khứ, vì vậy chúng ta dùng thì quá khứ đơn. Dạng phủ định là "didn\'t + V (nguyên thể)".',
+                rationale_en: '"Last weekend" indicates a finished time in the past, so we use the simple past tense. The negative form is "didn\'t + V (infinitive)".'
+            },
+            {
+                type: 'mc',
+                question: '51. I ... in England for a few weeks now.',
+                options: [
+                    { text: 'A. has been staying', isCorrect: false },
+                    { text: 'B. am staying', isCorrect: false },
+                    { text: 'C. have been staying', isCorrect: true },
+                    { text: 'D. stay', isCorrect: false }
+                ],
+                correctAnswer: 'C. have been staying',
+                correctAnswer_vi: 'đã đang ở',
+                hint_vi: 'Hành động bắt đầu trong quá khứ, kéo dài liên tục đến hiện tại.',
+                rationale_vi: 'Thì hiện tại hoàn thành tiếp diễn (have/has been + V-ing) được dùng để nhấn mạnh sự liên tục của một hành động bắt đầu trong quá khứ và vẫn tiếp tục đến hiện tại.',
+                rationale_en: 'The present perfect continuous tense (have/has been + V-ing) is used to emphasize the duration of an action that started in the past and continues to the present.'
+            },
+            {
+                type: 'rearrange',
+                question: '52. for everyone./ difficult to/ arrange a day/ which was convenient/ It was/',
+                words: ['It was', 'difficult to', 'arrange a day', 'which was convenient', 'for everyone.'],
+                correctAnswer: 'It was difficult to arrange a day which was convenient for everyone.',
+                correctAnswer_vi: 'Thật khó để sắp xếp một ngày thuận tiện cho tất cả mọi người.',
+                hint_vi: 'Bắt đầu câu với "It was difficult to...".',
+                rationale_vi: 'Cấu trúc: It + be + adj + to V. Mệnh đề quan hệ "which was convenient for everyone" bổ nghĩa cho "a day".',
+                rationale_en: 'Structure: It + be + adj + to V. The relative clause "which was convenient for everyone" modifies "a day".'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '53. The new radio didn’t work, __ he took it back to the shop.',
+                correctAnswer: 'so',
+                correctAnswer_vi: 'vì vậy',
+                hint_vi: 'Liên từ chỉ kết quả. (2 ký tự)',
+                rationale_vi: '"So" được dùng để giới thiệu mệnh đề chỉ kết quả của hành động ở mệnh đề trước.',
+                rationale_en: '"So" is used to introduce a clause that shows the result of the action in the previous clause.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '54. There was so little sugar ____ I decided not to make a cake.',
+                correctAnswer: 'that',
+                correctAnswer_vi: 'đến nỗi',
+                hint_vi: 'Cấu trúc "so ... that". (4 ký tự)',
+                rationale_vi: 'Cấu trúc "so + adj/adv + that + clause" được dùng để chỉ kết quả hoặc mức độ.',
+                rationale_en: 'The structure "so + adj/adv + that + clause" is used to show result or degree.'
+            },
+            {
+                type: 'rearrange',
+                question: '55. phone rang./ I ran/ the room/ out of/ when the/',
+                words: ['I ran', 'out of', 'the room', 'when the', 'phone rang.'],
+                correctAnswer: 'I ran out of the room when the phone rang.',
+                correctAnswer_vi: 'Tôi chạy ra khỏi phòng khi điện thoại reo.',
+                hint_vi: 'Mệnh đề chỉ thời gian với "when".',
+                rationale_vi: 'Câu này kết hợp hai hành động trong quá khứ, một hành động xảy ra sau hành động kia.',
+                rationale_en: 'This sentence combines two past actions, with one happening after the other.'
+            },
+            {
+                type: 'rearrange',
+                question: '56. are / made / from / metal./ These spoons /',
+                words: ['These spoons', 'are', 'made', 'from', 'metal.'],
+                correctAnswer: 'These spoons are made from metal.',
+                correctAnswer_vi: 'Những chiếc thìa này được làm từ kim loại.',
+                hint_vi: 'Cấu trúc bị động "be made from".',
+                rationale_vi: 'Cấu trúc bị động thì hiện tại đơn: S + are + V3/ed. "Be made from" được dùng khi vật liệu bị thay đổi trong quá trình làm ra sản phẩm.',
+                rationale_en: 'Simple present passive structure: S + are + V3/ed. "Be made from" is used when the material is changed during the process of making the product.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '57. Dead leaves fall to the ground and decompose very quickly in wet ______er.',
+                correctAnswer: 'weath',
+                correctAnswer_vi: 'weath (để hoàn thành "weather")',
+                hint_vi: 'Từ có nghĩa là "thời tiết". (5 ký tự)',
+                rationale_vi: 'Từ cần hoàn thành là "weather" (thời tiết).',
+                rationale_en: 'The word to complete is "weather".'
+            },
+            {
+                type: 'mc',
+                question: '58. In 2019, more than 1,300 tourists ____ through Sary-Mogol.',
+                options: [
+                    { text: 'A. pass', isCorrect: false },
+                    { text: 'B. had passed', isCorrect: false },
+                    { text: 'C. passed', isCorrect: true },
+                    { text: 'D. have passed', isCorrect: false }
+                ],
+                correctAnswer: 'C. passed',
+                correctAnswer_vi: 'đã đi qua',
+                hint_vi: '"In 2019" là một thời điểm cụ thể trong quá khứ.',
+                rationale_vi: 'Khi có một thời gian cụ thể trong quá khứ đã kết thúc (In 2019), chúng ta dùng thì quá khứ đơn.',
+                rationale_en: 'When there is a specific, finished time in the past (In 2019), we use the simple past tense.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '59. Don’t talk ____ that to me!',
+                correctAnswer: 'like',
+                correctAnswer_vi: 'như thế',
+                hint_vi: 'Từ có nghĩa là "giống như, như thế". (4 ký tự)',
+                rationale_vi: '"Like that" có nghĩa là "theo cách đó". Câu này có nghĩa là "Đừng nói với tôi theo cách đó!".',
+                rationale_en: '"Like that" means "in that manner". The sentence means "Don\'t speak to me in that way!".'
+            },
+            {
+                type: 'rearrange',
+                question: '60. me tell you/ Here is the/ family and let/ photo of my/ about us./',
+                words: ['Here is the', 'photo of my', 'family and let', 'me tell you', 'about us.'],
+                correctAnswer: 'Here is the photo of my family and let me tell you about us.',
+                correctAnswer_vi: 'Đây là bức ảnh của gia đình tôi và để tôi kể cho bạn nghe về chúng tôi.',
+                hint_vi: 'Bắt đầu câu với "Here is...".',
+                rationale_vi: 'Câu này gồm hai phần được nối bằng "and". Phần đầu giới thiệu bức ảnh, phần hai là một lời đề nghị.',
+                rationale_en: 'This sentence has two parts joined by "and". The first part introduces the photo, the second part is a suggestion.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '61. There are only a few hotels in the city so it’s hard to ____ accommodation during the high season.',
+                correctAnswer: 'find',
+                correctAnswer_vi: 'tìm',
+                hint_vi: 'Hành động tìm kiếm và có được thứ gì đó. (4 ký tự)',
+                rationale_vi: '"Find accommodation" có nghĩa là tìm được chỗ ở. Đây là một cụm từ phổ biến.',
+                rationale_en: '"Find accommodation" means to locate a place to stay. It is a common collocation.'
+            },
+            {
+                type: 'rearrange',
+                question: '62. Robert / to drink more/ The doctor / fresh water./ advised /',
+                words: ['The doctor', 'advised', 'Robert', 'to drink more', 'fresh water.'],
+                correctAnswer: 'The doctor advised Robert to drink more fresh water.',
+                correctAnswer_vi: 'Bác sĩ khuyên Robert uống nhiều nước lọc hơn.',
+                hint_vi: 'Cấu trúc "advise somebody to do something".',
+                rationale_vi: 'Cấu trúc tường thuật một lời khuyên: S + advised + O + to V.',
+                rationale_en: 'Structure for reporting advice: S + advised + O + to V.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '63. Having the common cold is very ___asant.',
+                correctAnswer: 'unple',
+                correctAnswer_vi: 'unple (để hoàn thành "unpleasant")',
+                hint_vi: 'Tiền tố phủ định. (5 ký tự)',
+                rationale_vi: 'Từ cần hoàn thành là "unpleasant" (khó chịu, không dễ chịu). "Un-" là tiền tố phủ định.',
+                rationale_en: 'The word to complete is "unpleasant" (not pleasant or enjoyable). "Un-" is a negative prefix.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '64. When the clock strikes 6a.m., my new day b____s again.',
+                correctAnswer: 'egin',
+                correctAnswer_vi: 'egin (để hoàn thành "begins")',
+                hint_vi: 'Từ có nghĩa là "bắt đầu". (5 ký tự)',
+                rationale_vi: 'Từ cần hoàn thành là "begins" (bắt đầu). Động từ được chia ở thì hiện tại đơn với chủ ngữ số ít "my new day".',
+                rationale_en: 'The word to complete is "begins". The verb is in the simple present tense for the singular subject "my new day".'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '65. We can look __ information on recycling things in the local library.',
+                correctAnswer: 'up',
+                correctAnswer_vi: 'tra',
+                hint_vi: 'Cụm động từ "look up" có nghĩa là "tra cứu". (2 ký tự)',
+                rationale_vi: 'Cụm động từ "look up" có nghĩa là tìm kiếm thông tin trong sách, từ điển, hoặc máy tính.',
+                rationale_en: 'The phrasal verb "look up" means to search for information in a book, dictionary, or computer.'
+            },
+            {
+                type: 'mc',
+                question: '66. Choose the INCORRECT word or phrase in the following sentence: It is <u>greatly</u> to be with you on such a lovely day.',
+                options: [
+                    { text: 'A. It is', isCorrect: false },
+                    { text: 'B. greatly', isCorrect: true },
+                    { text: 'C. be with you', isCorrect: false },
+                    { text: 'D. lovely', isCorrect: false }
+                ],
+                correctAnswer: 'B. greatly',
+                correctAnswer_vi: 'greatly',
+                hint_vi: 'Sau động từ "to be", ta cần một tính từ, không phải trạng từ.',
+                rationale_vi: 'Sai ở "greatly". Sau động từ "to be", chúng ta cần một tính từ để mô tả chủ ngữ. Phải là "It is great...". "Greatly" là một trạng từ.',
+                rationale_en: 'The error is "greatly". After the verb "to be", we need an adjective to describe the subject. It should be "It is great...". "Greatly" is an adverb.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '67. The 22nd Olympic Games ____ held in Moscow.',
+                correctAnswer: 'were',
+                correctAnswer_vi: 'đã được',
+                hint_vi: 'Câu bị động ở thì quá khứ đơn, chủ ngữ số nhiều. (4 ký tự)',
+                rationale_vi: 'Chủ ngữ "The 22nd Olympic Games" là số nhiều. Đây là câu bị động ở thì quá khứ, nên ta dùng "were".',
+                rationale_en: 'The subject "The 22nd Olympic Games" is plural. This is a passive sentence in the past, so we use "were".'
+            },
+            {
+                type: 'mc',
+                question: '68. My sister is … at cooking than I am.',
+                options: [
+                    { text: 'A. good', isCorrect: false },
+                    { text: 'B. well', isCorrect: false },
+                    { text: 'C. better', isCorrect: true },
+                    { text: 'D. badly', isCorrect: false }
+                ],
+                correctAnswer: 'C. better',
+                correctAnswer_vi: 'giỏi hơn',
+                hint_vi: 'Đây là câu so sánh hơn. Dạng so sánh hơn của "good" là gì?',
+                rationale_vi: '"Better" là dạng so sánh hơn bất quy tắc của tính từ "good". Cấu trúc: S1 + be + better at something + than + S2.',
+                rationale_en: '"Better" is the irregular comparative form of the adjective "good". Structure: S1 + be + better at something + than + S2.'
+            },
+            {
+                type: 'rearrange',
+                question: '69. to be/ are beautiful enough/ These kinds of flowers/ exported to/ foreign markets./',
+                words: ['These kinds of flowers', 'are beautiful enough', 'to be', 'exported to', 'foreign markets.'],
+                correctAnswer: 'These kinds of flowers are beautiful enough to be exported to foreign markets.',
+                correctAnswer_vi: 'Những loại hoa này đủ đẹp để được xuất khẩu ra thị trường nước ngoài.',
+                hint_vi: 'Cấu trúc "adj + enough + to V".',
+                rationale_vi: 'Cấu trúc: S + be + adj + enough + to V (bị động: to be + V3/ed).',
+                rationale_en: 'Structure: S + be + adj + enough + to V (passive: to be + V3/ed).'
+            },
+            {
+                type: 'mc',
+                question: '70. It took me a long time to get used … glasses.',
+                options: [
+                    { text: 'A. to wear', isCorrect: false },
+                    { text: 'B. to wearing', isCorrect: true },
+                    { text: 'C. wear', isCorrect: false },
+                    { text: 'D. wore', isCorrect: false }
+                ],
+                correctAnswer: 'B. to wearing',
+                correctAnswer_vi: 'với việc đeo',
+                hint_vi: 'Cấu trúc "get used to + V-ing".',
+                rationale_vi: 'Cấu trúc "to get used to something/doing something" có nghĩa là "trở nên quen với việc gì". Sau "to" trong cấu trúc này là một danh từ hoặc V-ing.',
+                rationale_en: 'The structure "to get used to something/doing something" means "to become accustomed to something". The "to" here is a preposition, so it\'s followed by a noun or V-ing.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '71. Much of champagne ___ exported from France to our country this year.',
+                correctAnswer: 'is',
+                correctAnswer_vi: 'được',
+                hint_vi: 'Champagne là danh từ không đếm được. (2 ký tự)',
+                rationale_vi: '"Champagne" là danh từ không đếm được, vì vậy động từ phải ở dạng số ít. Đây là câu bị động thì hiện tại đơn.',
+                rationale_en: '"Champagne" is an uncountable noun, so the verb must be in the singular form. This is a simple present passive sentence.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '72. Our post is delivered daily, except ___ Sunday.',
+                correctAnswer: 'on',
+                correctAnswer_vi: 'vào',
+                hint_vi: 'Giới từ đi với ngày trong tuần. (2 ký tự)',
+                rationale_vi: 'Giới từ "on" được dùng trước các ngày trong tuần. "Except on Sunday" có nghĩa là "ngoại trừ Chủ Nhật".',
+                rationale_en: 'The preposition "on" is used before days of the week. "Except on Sunday" means "with the exclusion of Sunday".'
+            },
+            {
+                type: 'rearrange',
+                question: '73. but has now lost/ interest in it./ pop music/ She used to/ be fond of/',
+                words: ['She used to', 'be fond of', 'pop music', 'but has now lost', 'interest in it.'],
+                correctAnswer: 'She used to be fond of pop music but has now lost interest in it.',
+                correctAnswer_vi: 'Cô ấy đã từng thích nhạc pop nhưng bây giờ đã mất hứng thú với nó.',
+                hint_vi: '"Used to" diễn tả một thói quen trong quá khứ.',
+                rationale_vi: 'Câu này sử dụng "used to + V" để chỉ một thói quen trong quá khứ không còn ở hiện tại, và nối với một mệnh đề ở hiện tại hoàn thành bằng "but".',
+                rationale_en: 'This sentence uses "used to + V" for a past habit that is no longer true, connected to a present perfect clause with "but".'
+            },
+            {
+                type: 'multimedia',
+                question: '74. Look at the picture. Which sentence is correct?',
+                mediaType: 'image',
+                imagePrompt: 'Một con ếch màu xanh lá cây.',
+                mediaSource: 'https://placehold.co/566x320/7CFC00/FFFFFF?text=Green+Frog',
+                options: [
+                    { text: 'A. The song is about a brown teddy.', isCorrect: false },
+                    { text: 'B. The song is about a green monster.', isCorrect: false },
+                    { text: 'C. The song is about a blue toad.', isCorrect: false },
+                    { text: 'D. The song is about a green frog.', isCorrect: true }
+                ],
+                correctAnswer: 'D. The song is about a green frog.',
+                correctAnswer_vi: 'Bài hát về một con ếch xanh.',
+                hint_vi: 'Chọn câu mô tả đúng hình ảnh.',
+                rationale_vi: 'Hình ảnh cho thấy một con ếch màu xanh lá cây. Mặc dù câu hỏi nói về "bài hát", nhưng đáp án đúng là mô tả hình ảnh.',
+                rationale_en: 'The image shows a green frog. Although the question mentions "the song", the correct answer is the one that describes the image.'
+            },
+            {
+                type: 'rearrange',
+                question: '75. and saw lava/ the volcano/ We flew over/ was pouring/ out./',
+                words: ['We flew over', 'the volcano', 'and saw lava', 'was pouring', 'out.'],
+                correctAnswer: 'We flew over the volcano and saw lava was pouring out.',
+                correctAnswer_vi: 'Chúng tôi bay qua ngọn núi lửa và thấy dung nham đang phun trào.',
+                hint_vi: 'Cấu trúc "see something doing something".',
+                rationale_vi: 'Cấu trúc với động từ tri giác: S + see + O + V-ing (chứng kiến một phần hành động đang diễn ra).',
+                rationale_en: 'Structure with verbs of perception: S + see + O + V-ing (to witness part of an ongoing action).'
+            },
+            {
+                type: 'rearrange',
+                question: '76. other people laugh/ because he likes telling jokes./ Nam/ often/ makes/',
+                words: ['Nam', 'often', 'makes', 'other people laugh', 'because he likes telling jokes.'],
+                correctAnswer: 'Nam often makes other people laugh because he likes telling jokes.',
+                correctAnswer_vi: 'Nam thường làm người khác cười vì anh ấy thích kể chuyện cười.',
+                hint_vi: 'Cấu trúc "make somebody do something".',
+                rationale_vi: 'Cấu trúc: S + make + O + V (nguyên thể không "to"). Mệnh đề "because..." giải thích lý do.',
+                rationale_en: 'Structure: S + make + O + V (bare infinitive). The "because..." clause explains the reason.'
+            },
+            {
+                type: 'mc',
+                question: '77. He was ______ tired that he went to bed early.',
+                options: [
+                    { text: 'A. too', isCorrect: false },
+                    { text: 'B. enough', isCorrect: false },
+                    { text: 'C. so', isCorrect: true },
+                    { text: 'D. very', isCorrect: false }
+                ],
+                correctAnswer: 'C. so',
+                correctAnswer_vi: 'quá',
+                hint_vi: 'Cấu trúc "so ... that".',
+                rationale_vi: 'Cấu trúc "so + adj/adv + that + clause" được dùng để chỉ kết quả. "Anh ấy quá mệt đến nỗi anh ấy đi ngủ sớm".',
+                rationale_en: 'The structure "so + adj/adv + that + clause" is used to show a result. "He was so tired that he went to bed early".'
+            },
+            {
+                type: 'mc',
+                question: '78. The weather forecast said it ____ heavily the following day.',
+                options: [
+                    { text: 'A. will rain', isCorrect: false },
+                    { text: 'B. rains', isCorrect: false },
+                    { text: 'C. would rain', isCorrect: true },
+                    { text: 'D. rained', isCorrect: false }
+                ],
+                correctAnswer: 'C. would rain',
+                correctAnswer_vi: 'sẽ mưa',
+                hint_vi: 'Đây là câu tường thuật, "will" đổi thành "would".',
+                rationale_vi: 'Trong câu tường thuật, động từ được lùi một thì. "Will" trong câu trực tiếp sẽ đổi thành "would" trong câu gián tiếp. "The following day" là dạng tường thuật của "tomorrow".',
+                rationale_en: 'In reported speech, verbs are backshifted. "Will" in direct speech changes to "would" in indirect speech. "The following day" is the reported form of "tomorrow".'
+            },
+            {
+                type: 'rearrange',
+                question: '79. the Imperial Citadel of Thang Long / is going to / catch a bus to / He / next Sunday./',
+                words: ['He', 'is going to', 'catch a bus to', 'the Imperial Citadel of Thang Long', 'next Sunday.'],
+                correctAnswer: 'He is going to catch a bus to the Imperial Citadel of Thang Long next Sunday.',
+                correctAnswer_vi: 'Anh ấy sẽ bắt xe buýt đến Hoàng thành Thăng Long vào Chủ nhật tới.',
+                hint_vi: 'Cấu trúc tương lai gần "be going to".',
+                rationale_vi: 'Cấu trúc thì tương lai gần: S + be going to + V + ... + time. Dùng để diễn tả một kế hoạch, dự định.',
+                rationale_en: 'Near future tense structure: S + be going to + V + ... + time. It is used to express a plan or intention.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '80. I’m not sure, but as far __ I know he will stay at home on holiday.',
+                correctAnswer: 'as',
+                correctAnswer_vi: 'theo như',
+                hint_vi: 'Cụm từ "as far as I know". (2 ký tự)',
+                rationale_vi: '"As far as I know" là một thành ngữ có nghĩa là "theo những gì tôi biết", dùng để diễn tả sự không chắc chắn hoàn toàn.',
+                rationale_en: '"As far as I know" is an idiom meaning "according to the information that I have", used to express slight uncertainty.'
+            },
+            {
+                type: 'multimedia',
+                question: '81. What does he sometimes do in the evening?',
+                mediaType: 'audio',
+                mediaSource: 'https://placehold.co/1/FF0000/FFFFFF?text=Audio',
+                imagePrompt: 'Giả sử đoạn audio mô tả các hoạt động buổi tối của một người.',
+                options: [
+                    { text: 'A. He has some chat with his friends or goes for a short walk in the park', isCorrect: false },
+                    { text: 'B. He has some beer with his family or goes for a short walk in the park', isCorrect: false },
+                    { text: 'C. He has some chat with his family or goes for a short walk in the park', isCorrect: true },
+                    { text: 'D. He has some beer with his friends or goes for a short walk in the park', isCorrect: false }
+                ],
+                correctAnswer: 'C. He has some chat with his family or goes for a short walk in the park',
+                correctAnswer_vi: 'Anh ấy trò chuyện với gia đình hoặc đi dạo ngắn trong công viên',
+                hint_vi: 'Lắng nghe các hoạt động và đối tượng liên quan.',
+                rationale_vi: 'Dựa trên câu trả lời, đoạn audio mô tả rằng vào buổi tối anh ấy đôi khi trò chuyện (chat) với gia đình (family) hoặc đi dạo.',
+                rationale_en: 'Based on the answer, the audio describes that in the evening he sometimes chats with his family or goes for a walk.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '82. My father doesn’t smoke cigarettes any ____. He gave it up five years ago.',
+                correctAnswer: 'more',
+                correctAnswer_vi: 'nữa',
+                hint_vi: 'Cụm từ "not any more" có nghĩa là "không còn nữa". (4 ký tự)',
+                rationale_vi: '"Not any more" (hoặc anymore) được dùng để nói rằng một tình huống đã thay đổi và không còn như trước.',
+                rationale_en: '"Not any more" (or anymore) is used to say that a situation has changed and is no longer the same.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '83. Your application must be typed ____ 3 copies to hand in for our company.',
+                correctAnswer: 'into',
+                correctAnswer_vi: 'thành',
+                hint_vi: 'Giới từ chỉ sự chuyển đổi. (4 ký tự)',
+                rationale_vi: '"Type into 3 copies" có nghĩa là gõ thành 3 bản. "Into" chỉ kết quả của sự chuyển đổi.',
+                rationale_en: '"Type into 3 copies" means to type so that there are 3 copies. "Into" can indicate the result of a transformation.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '84. How often do your parents __ camping? – Every weekend.',
+                correctAnswer: 'go',
+                correctAnswer_vi: 'đi',
+                hint_vi: 'Cụm từ "go camping". (2 ký tự)',
+                rationale_vi: 'Cụm động từ "go camping" có nghĩa là đi cắm trại. Đây là một cụm từ cố định.',
+                rationale_en: 'The phrasal verb "go camping" means to go on a camping trip. It is a fixed collocation.'
+            },
+            {
+                type: 'rearrange',
+                question: '85. her/ a love story./ He gives/ a novel/ about/',
+                words: ['He gives', 'her', 'a novel', 'about', 'a love story.'],
+                correctAnswer: 'He gives her a novel about a love story.',
+                correctAnswer_vi: 'Anh ấy tặng cô một cuốn tiểu thuyết về một câu chuyện tình yêu.',
+                hint_vi: 'Cấu trúc "give somebody something".',
+                rationale_vi: 'Cấu trúc với hai tân ngữ: S + give + indirect object (her) + direct object (a novel...).',
+                rationale_en: 'Structure with two objects: S + give + indirect object (her) + direct object (a novel...).'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '86. Big Ben is the ____ famous clock in London.',
+                correctAnswer: 'most',
+                correctAnswer_vi: 'nổi tiếng nhất',
+                hint_vi: 'Dạng so sánh nhất của "famous". (4 ký tự)',
+                rationale_vi: 'Để tạo dạng so sánh nhất cho tính từ dài (như "famous"), ta dùng "the most + adj".',
+                rationale_en: 'To form the superlative of a long adjective (like "famous"), we use "the most + adj".'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '87. You can play ____ever games you like in summer holiday.',
+                correctAnswer: 'what',
+                correctAnswer_vi: 'bất cứ',
+                hint_vi: 'Từ có nghĩa là "bất cứ thứ gì". (4 ký tự)',
+                rationale_vi: '"Whatever" có nghĩa là "bất cứ thứ gì". "Whatever games" là "bất cứ trò chơi nào".',
+                rationale_en: '"Whatever" means "anything or everything". "Whatever games" means "any games".'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '88. It only _____ me about 40 minutes to get to work.',
+                correctAnswer: 'takes',
+                correctAnswer_vi: 'mất',
+                hint_vi: 'Cấu trúc "It takes somebody + time + to do something". (5 ký tự)',
+                rationale_vi: 'Cấu trúc này được dùng để nói về khoảng thời gian cần thiết để làm một việc gì. Động từ "take" được chia ở thì hiện tại đơn.',
+                rationale_en: 'This structure is used to talk about the amount of time needed to do something. The verb "take" is in the simple present tense.'
+            },
+            {
+                type: 'rearrange',
+                question: '89. city center./ It is a/ thirty-minute drive/ from here/ to the/',
+                words: ['It is a', 'thirty-minute drive', 'from here', 'to the', 'city center.'],
+                correctAnswer: 'It is a thirty-minute drive from here to the city center.',
+                correctAnswer_vi: 'Mất ba mươi phút lái xe từ đây đến trung tâm thành phố.',
+                hint_vi: 'Cụm từ "a thirty-minute drive".',
+                rationale_vi: 'Cấu trúc: It is + a + [số]-[đơn vị thời gian] + drive from [A] to [B].',
+                rationale_en: 'Structure: It is + a + [number]-[time unit] + drive from [A] to [B].'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '90. Study hard __ you’ll fail the exam.',
+                correctAnswer: 'or',
+                correctAnswer_vi: 'nếu không thì',
+                hint_vi: 'Liên từ dùng để đưa ra một kết quả tiêu cực nếu điều kiện không được đáp ứng. (2 ký tự)',
+                rationale_vi: 'Trong câu mệnh lệnh, "or" được dùng để chỉ một kết quả không mong muốn sẽ xảy ra nếu mệnh lệnh không được tuân theo.',
+                rationale_en: 'In an imperative sentence, "or" is used to indicate an undesirable consequence if the command is not followed.'
+            },
+            {
+                type: 'mc',
+                question: '91. If people don’t throw trash ... the water, it won’t be polluted.',
+                options: [
+                    { text: 'A. in', isCorrect: false },
+                    { text: 'B. to', isCorrect: false },
+                    { text: 'C. onto', isCorrect: true },
+                    { text: 'D. out of', isCorrect: false }
+                ],
+                correctAnswer: 'C. onto',
+                correctAnswer_vi: 'lên trên',
+                hint_vi: 'Giới từ chỉ sự di chuyển đến một vị trí trên một bề mặt.',
+                rationale_vi: '"Onto" được dùng để chỉ sự di chuyển đến một vị trí trên bề mặt của cái gì đó. "In" hoặc "into" cũng có thể đúng, nhưng "onto" nhấn mạnh hành động ném rác lên bề mặt nước.',
+                rationale_en: '"Onto" is used to show movement to a position on a surface. "In" or "into" could also be correct, but "onto" emphasizes the action of throwing trash onto the surface of the water.'
+            },
+            {
+                type: 'mc',
+                question: '92. How many syllables are there in the word “aquarium”?',
+                options: [
+                    { text: 'A. three', isCorrect: false },
+                    { text: 'B. two', isCorrect: false },
+                    { text: 'C. one', isCorrect: false },
+                    { text: 'D. four', isCorrect: true }
+                ],
+                correctAnswer: 'D. four',
+                correctAnswer_vi: 'bốn',
+                hint_vi: 'Phân tích từ: a-qua-ri-um.',
+                rationale_vi: 'Từ "aquarium" được chia thành bốn âm tiết: a-qua-ri-um (/əˈkwɛəriəm/).',
+                rationale_en: 'The word "aquarium" is divided into four syllables: a-qua-ri-um (/əˈkwɛəriəm/).'
+            },
+            {
+                type: 'rearrange',
+                question: '93. to drive more / he / carefully than / does now./ He used /',
+                words: ['He used', 'to drive more', 'carefully than', 'he', 'does now.'],
+                correctAnswer: 'He used to drive more carefully than he does now.',
+                correctAnswer_vi: 'Anh ấy đã từng lái xe cẩn thận hơn bây giờ.',
+                hint_vi: 'So sánh một thói quen trong quá khứ ("used to") với hiện tại.',
+                rationale_vi: 'Câu này so sánh cách lái xe trong quá khứ (sử dụng "used to") với cách lái xe ở hiện tại (sử dụng thì hiện tại đơn "does").',
+                rationale_en: 'This sentence compares the way of driving in the past (using "used to") with the way of driving in the present (using the simple present "does").'
+            },
+            {
+                type: 'multimedia',
+                question: '94. Listen and tick:',
+                mediaType: 'audio',
+                mediaSource: 'https://res.ioe.vn/edu/EOlympic/ExamData/ImageExam/2014/3/12/635302351947775639_Audio.mp3',
+                options: [
+                    { text: 'A. Pete has to cross the road in Hanoi.', isCorrect: false },
+                    { text: 'B. Pete hates crossing the road in Hanoi.', isCorrect: true },
+                    { text: 'C. Pete gets loss on the road in Hanoi.', isCorrect: false },
+                    { text: 'D. Pete hates the crossing road in Hanoi.', isCorrect: false }
+                ],
+                correctAnswer: 'B. Pete hates crossing the road in Hanoi.',
+                correctAnswer_vi: 'Pete ghét việc qua đường ở Hà Nội.',
+                hint_vi: 'Lắng nghe cảm xúc của Pete về việc qua đường.',
+                rationale_vi: 'Đoạn audio thể hiện sự khó khăn và cảm xúc tiêu cực của Pete khi phải qua đường ở Hà Nội, vì vậy "hates" (ghét) là từ khóa chính xác.',
+                rationale_en: 'The audio expresses Pete\'s difficulty and negative feelings about crossing the road in Hanoi, so "hates" is the correct keyword.'
+            },
+            {
+                type: 'mc',
+                question: '95. We arrived on time … the traffic was bad.',
+                options: [
+                    { text: 'A. although', isCorrect: true },
+                    { text: 'B. even', isCorrect: false },
+                    { text: 'C. in spite of', isCorrect: false },
+                    { text: 'D. despite', isCorrect: false }
+                ],
+                correctAnswer: 'A. although',
+                correctAnswer_vi: 'mặc dù',
+                hint_vi: 'Cần một liên từ để nối hai mệnh đề tương phản.',
+                rationale_vi: '"Although" là một liên từ, được theo sau bởi một mệnh đề (S+V). "In spite of" và "despite" là giới từ, theo sau bởi một danh từ/cụm danh từ. Câu này có hai mệnh đề, nên dùng "although".',
+                rationale_en: '"Although" is a conjunction, followed by a clause (S+V). "In spite of" and "despite" are prepositions, followed by a noun/noun phrase. This sentence has two clauses, so "although" is correct.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '96. Jane and Jack stood in front of the mirror and looked at __________.',
+                correctAnswer: 'themselves',
+                correctAnswer_vi: 'chính họ',
+                hint_vi: 'Đại từ phản thân cho "Jane and Jack". (10 ký tự)',
+                rationale_vi: 'Đại từ phản thân "themselves" được dùng khi chủ ngữ và tân ngữ của hành động là cùng một đối tượng (Jane and Jack).',
+                rationale_en: 'The reflexive pronoun "themselves" is used when the subject and the object of the verb are the same (Jane and Jack).'
+            },
+            {
+                type: 'mc',
+                question: '97. The professor gave an interesting … on the global climates.',
+                options: [
+                    { text: 'A. talk', isCorrect: true },
+                    { text: 'B. tell', isCorrect: false },
+                    { text: 'C. speak', isCorrect: false },
+                    { text: 'D. say', isCorrect: false }
+                ],
+                correctAnswer: 'A. talk',
+                correctAnswer_vi: 'bài nói chuyện',
+                hint_vi: 'Cụm từ "give a talk" có nghĩa là "thực hiện một bài nói chuyện/diễn văn".',
+                rationale_vi: '"Talk" có thể được dùng như một danh từ có nghĩa là một bài phát biểu hoặc bài giảng không chính thức. Cụm từ "give a talk" rất phổ biến.',
+                rationale_en: '"Talk" can be used as a noun to mean an informal speech or lecture. The collocation "give a talk" is very common.'
+            },
+            {
+                type: 'rearrange',
+                question: '98. left Vietnam in 1911./ Nha Rong Harbor because/ John should go to/ it is the place where/ President Ho Chi Minh/',
+                words: ['John should go to', 'Nha Rong Harbor because', 'it is the place where', 'President Ho Chi Minh', 'left Vietnam in 1911.'],
+                correctAnswer: 'John should go to Nha Rong Harbor because it is the place where President Ho Chi Minh left Vietnam in 1911.',
+                correctAnswer_vi: 'John nên đến Bến Nhà Rồng vì đó là nơi Chủ tịch Hồ Chí Minh rời Việt Nam vào năm 1911.',
+                hint_vi: 'Mệnh đề chỉ lý do với "because".',
+                rationale_vi: 'Câu này đưa ra một lời khuyên ("should go to...") và giải thích lý do bằng một mệnh đề bắt đầu bằng "because".',
+                rationale_en: 'This sentence gives a piece of advice ("should go to...") and explains the reason with a clause beginning with "because".'
+            },
+            {
+                type: 'rearrange',
+                question: '99. The Amazon/ the / in the world./ longest rivers / is one of /',
+                words: ['The Amazon', 'is one of', 'the', 'longest rivers', 'in the world.'],
+                correctAnswer: 'The Amazon is one of the longest rivers in the world.',
+                correctAnswer_vi: 'Sông Amazon là một trong những con sông dài nhất thế giới.',
+                hint_vi: 'Cấu trúc "one of the + so sánh nhất + danh từ số nhiều".',
+                rationale_vi: 'Cấu trúc "one of the + superlative + plural noun" được dùng để chỉ một đối tượng trong một nhóm các đối tượng tốt nhất/lớn nhất/dài nhất...',
+                rationale_en: 'The structure "one of the + superlative + plural noun" is used to single out one item from a group of the best/biggest/longest items, etc.'
+            },
+            {
+                type: 'fill-in-the-blank',
+                question: '100. __ Vietnam, there are more and more families having cable TV.',
+                correctAnswer: 'In',
+                correctAnswer_vi: 'Ở',
+                hint_vi: 'Giới từ chỉ địa điểm, quốc gia. (2 ký tự)',
+                rationale_vi: 'Giới từ "in" được dùng trước tên của các quốc gia, thành phố, và các khu vực địa lý lớn.',
+                rationale_en: 'The preposition "in" is used before the names of countries, cities, and large geographical areas.'
+            }
+        ];
+        
+        // --- Component: MediaDisplay (Helper for Image/Audio rendering) ---
+        const MediaDisplay = ({ question, showMessage }) => {
+            if (question.mediaType === 'image') {
+                return (
+                    <div className="w-full p-4 bg-gray-100 rounded-xl mb-4 text-center border-2 border-dashed border-gray-300">
+                        <p className="text-blue-600 font-bold mb-2">🖼️ Câu hỏi kèm Hình ảnh</p>
+                        <img 
+                            src={question.mediaSource}
+                            alt={`Hình ảnh IOE: ${question.imagePrompt || 'Chủ đề câu hỏi'}`} 
+                            className="w-full max-w-xs mx-auto rounded-lg shadow-md border-2 border-gray-300"
+                            crossOrigin="anonymous"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => { 
+                                e.target.onerror = null; 
+                                e.target.src = `https://placehold.co/566x320/FF0000/FFFFFF?text=L%E1%BB%97I+T%E1%BA%A2I+%E1%BA%A2NH+(CORS)`; 
+                                showMessage('Lỗi tải ảnh: File media có thể bị chặn bởi trình duyệt.', 'error');
+                            }}
+                        />
+                        <p className="text-xs text-gray-500 mt-2 break-all">Link gốc: {question.mediaSource}</p>
+                        {question.imagePrompt && <p className="text-sm text-blue-600 mt-2 font-medium">Gợi ý nội dung: {question.imagePrompt}</p>}
+                    </div>
+                );
+            }
+
+            if (question.mediaType === 'audio') {
+                return (
+                    <div className="w-full p-4 bg-gray-100 rounded-xl mb-4 text-center border-2 border-dashed border-gray-300">
+                        <p className="text-blue-600 font-bold mb-2">🔊 Câu hỏi Nghe (Bấm Play)</p>
+                        <audio 
+                            controls
+                            src={question.mediaSource}
+                            className="w-full max-w-sm mx-auto my-2"
+                            crossOrigin="anonymous"
+                            referrerPolicy="no-referrer"
+                            onError={() => {
+                                showMessage('Lỗi tải Audio: File media có thể bị chặn.', 'error');
+                            }}
+                        >
+                            <source src={question.mediaSource} type="audio/mp3" />
+                            Trình duyệt của bạn không hỗ trợ phần tử audio.
+                        </audio>
+                        <p className="text-xs text-gray-500 mt-2 break-all">Link gốc: {question.mediaSource}</p>
+                    </div>
+                );
+            }
+            return null;
+        }
+
+        // --- Component: ProgressBar.tsx ---
+        const ProgressBar = ({ percentage }) => {
+            return (
+                <div className="w-full h-2 bg-blue-100 rounded-full mt-4 overflow-hidden">
+                    <div
+                        className="h-full bg-blue-500 transition-all duration-500 ease-in-out"
+                        style={{ width: `${percentage}%` }}
+                    ></div>
+                </div>
+            );
+        };
+        
+        // --- Component: MessageBox.tsx ---
+        const MessageBox = ({ message, type }) => {
+            const [visible, setVisible] = React.useState(false);
+
+            React.useEffect(() => {
+                if (message) {
+                    setVisible(true);
+                    const timer = setTimeout(() => {
+                        setVisible(false);
+                    }, 2700);
+                    return () => clearTimeout(timer);
+                } else {
+                    setVisible(false);
+                }
+            }, [message, type]);
+
+            const baseClasses = "fixed top-4 left-1/2 -translate-x-1/2 p-4 rounded-xl shadow-xl text-center font-bold text-lg z-50 transition-all duration-300 transform";
+            
+            const typeClasses = {
+                success: 'bg-green-100 border border-green-500 text-green-800',
+                error: 'bg-red-100 border border-red-500 text-red-800',
+                info: 'bg-yellow-100 border border-yellow-500 text-yellow-800',
+            };
+
+            const visibilityClasses = visible ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none';
+
+            return (
+                <div className={`${baseClasses} ${typeClasses[type]} ${visibilityClasses}`}>
+                    {message}
+                </div>
+            );
+        };
+        
+        // --- Component: RationaleBox.tsx ---
+        const RationaleBox = ({ question, isCorrect, submittedAnswer }) => {
+            const boxClasses = `mt-6 p-4 rounded-xl border transition duration-300 fade-in border-l-4 ${
+                isCorrect ? 'bg-green-100 border-green-600' : 'bg-red-100 border-red-600'
+            }`;
+            
+            const submittedAnswerDisplay = () => {
+                const isFillIn = question.type === 'fill-in-the-blank' || (question.type === 'multimedia' && !question.options);
+                
+                if(isCorrect && !isFillIn) return null;
+                
+                return (
+                    <>
+                        <strong className="text-gray-700">
+                           Bạn đã chọn/Điền:
+                        </strong>
+                        <span className="text-red-700 font-medium break-words"> {submittedAnswer}</span>
+                        <br/>
+                    </>
+                );
+            }
+
+            return (
+                <div className={boxClasses}>
+                    <p className="font-bold text-lg mb-2 text-blue-700">Giải thích:</p>
+                    <div className="text-gray-700 space-y-1">
+                        {!isCorrect && submittedAnswerDisplay()}
+                        <p><strong>Đáp án đúng:</strong> <span className="text-green-800 font-semibold">{question.correctAnswer}</span></p>
+                        
+                        {question.correctAnswer_vi && (
+                            <p><strong>Dịch nghĩa:</strong> <span className="text-green-600 font-medium">{question.correctAnswer_vi}</span></p>
+                        )}
+                        <p className="pt-2 border-t border-gray-300 mt-2">{question.rationale_vi || 'Không có giải thích chi tiết.'}</p>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Component: FillInTheBlankQuestion.tsx ---
+        const FillInTheBlankQuestion = ({ question, isAnswered, onSubmit, showMessage, questionIndex }) => {
+            const [inputValue, setInputValue] = React.useState('');
+            const inputRef = React.useRef(null);
+
+            React.useEffect(() => {
+                setInputValue('');
+                if (inputRef.current && !isAnswered) {
+                    inputRef.current.focus();
+                }
+            }, [question, isAnswered]);
+
+            const handleSubmitClick = () => {
+                const trimmedInput = inputValue.trim();
+                if (trimmedInput === '') {
+                    showMessage('Vui lòng điền câu trả lời của bạn!', 'info');
+                    return;
+                }
+                const isCorrect = trimmedInput.toLowerCase() === question.correctAnswer.toLowerCase();
+                onSubmit(trimmedInput, isCorrect);
+            };
+            
+            const questionTextParts = React.useMemo(() => {
+                let text = question.question.replace(/^\d+\.\s*/, '');
+                
+                const markers = ['____', '_ _ _ _ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _ _', '_ _ _ _ _ _ _ _', '_ _ _ _ _ _ _', '_ _ _ _ _ _', '_ _ _ _ _', '_ _ _ _', '_ _ _', '_ _', '__', '_'];
+
+                for (const marker of markers) {
+                    if (text.includes(marker)) {
+                        const parts = text.split(marker);
+                        return [parts[0], parts.slice(1).join(marker)];
+                    }
+                }
+                 // Handle partial words like `c__se`
+                const partialMatch = text.match(/(.*)__+(.*)/);
+                if (partialMatch) {
+                    return [partialMatch[1], partialMatch[2]];
+                }
+
+                return [text, '']; 
+            }, [question.question]);
+            
+            let inputClasses = 'inline-block mx-2 p-2 border-2 rounded-lg text-lg text-center shadow-sm transition duration-200 align-baseline w-48 font-mono';
+            if (isAnswered) {
+                const isSubmissionCorrect = inputValue.trim().toLowerCase() === question.correctAnswer.toLowerCase();
+                inputClasses += isSubmissionCorrect ? ' border-green-500 bg-green-50 font-bold' : ' border-red-500 bg-red-50 font-bold';
+            } else {
+                inputClasses += ' border-gray-300 focus:border-blue-500';
+            }
+
+            const inputWidthStyle = {
+                width: `${Math.max(8, question.correctAnswer.length * 1.5)}rem`, 
+                maxWidth: '100%',
+            };
+
+
+            return (
+                <div className="space-y-4">
+                     {question.mediaType && <MediaDisplay question={question} showMessage={showMessage} />}
+                    <div className="text-xl sm:text-2xl font-semibold mb-6 leading-relaxed text-center flex justify-center items-center flex-wrap">
+                        <span className="mr-2">{questionIndex + 1}.</span>
+                        {questionTextParts[0] && <span>{questionTextParts[0]}</span>}
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            disabled={isAnswered}
+                            placeholder={isAnswered ? question.correctAnswer : ""}
+                            className={inputClasses}
+                            style={inputWidthStyle}
+                            onKeyPress={(e) => e.key === 'Enter' && !isAnswered && handleSubmitClick()}
+                            aria-label="Fill in the blank"
+                        />
+                        {questionTextParts[1] && <span>{questionTextParts[1]}</span>}
+                    </div>
+                    <button
+                        onClick={handleSubmitClick}
+                        disabled={isAnswered}
+                        className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300 hover:bg-green-700 mt-4 disabled:bg-gray-400 disabled:cursor-not-allowed active:scale-98"
+                    >
+                        Kiểm Tra
+                    </button>
+                </div>
+            );
+        };
+        
+        // --- Component: MultipleChoiceQuestion.tsx ---
+        const MultipleChoiceQuestion = ({ question, isAnswered, onSubmit, showMessage, questionIndex }) => {
+            const [selectedIndex, setSelectedIndex] = React.useState(null);
+
+            React.useEffect(() => {
+                setSelectedIndex(null);
+            }, [question]);
+
+            const handleSubmitClick = () => {
+                if (selectedIndex === null) {
+                    showMessage('Vui lòng chọn một đáp án!', 'info');
+                    return;
+                }
+                const selectedOption = question.options[selectedIndex];
+                onSubmit(selectedOption.text, selectedOption.isCorrect);
+            };
+
+            return (
+                <>
+                    {question.mediaType && <MediaDisplay question={question} showMessage={showMessage} />}
+                    
+                    <h3
+                        className="text-xl sm:text-2xl font-semibold mb-6 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: `${questionIndex + 1}. ${question.question.replace(/^\d+\.\s*/, '')}` }}
+                    />
+                    <div className="space-y-4">
+                        <div className="space-y-3">
+                            {question.options.map((option, index) => {
+                                const isSelected = selectedIndex === index;
+                                let labelClasses = "block p-4 border-2 rounded-xl shadow-md text-lg transition duration-200";
+
+                                if (isAnswered) {
+                                    labelClasses += " cursor-default";
+                                    if (option.isCorrect) {
+                                        labelClasses += " bg-green-100 border-green-500 font-bold";
+                                    } else if (isSelected) {
+                                        labelClasses += " bg-red-100 border-red-500 font-bold";
+                                    } else {
+                                        labelClasses += " border-gray-200 opacity-60";
+                                    }
+                                } else {
+                                    labelClasses += " cursor-pointer hover:bg-blue-50 hover:border-blue-300";
+                                    if(isSelected) {
+                                        labelClasses += " bg-blue-100 border-blue-500";
+                                    } else {
+                                        labelClasses += " border-gray-200";
+                                    }
+                                }
+
+                                return (
+                                    <div key={index} className="relative">
+                                        <input
+                                            type="radio"
+                                            id={`option-${questionIndex}-${index}`}
+                                            name={`mc-option-${questionIndex}`}
+                                            value={index}
+                                            className="hidden"
+                                            checked={isSelected}
+                                            onChange={() => setSelectedIndex(index)}
+                                            disabled={isAnswered}
+                                        />
+                                        <label htmlFor={`option-${questionIndex}-${index}`} className={labelClasses} dangerouslySetInnerHTML={{ __html: option.text }}></label>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <button
+                            onClick={handleSubmitClick}
+                            disabled={isAnswered}
+                            className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300 hover:bg-green-700 mt-4 disabled:bg-gray-400 disabled:cursor-not-allowed active:scale-98"
+                        >
+                            Kiểm Tra
+                        </button>
+                    </div>
+                </>
+            );
+        };
+        
+        // --- Component: RearrangeQuestion.tsx ---
+        const WordBlock = ({ word, onClick, isSource, isAnswered }) => {
+            const baseClasses = 'word-block px-3 py-2 text-base sm:text-lg font-semibold rounded-lg shadow-sm transition-all duration-150 break-words transform active:scale-95';
+            const sourceClasses = isSource ? 'bg-blue-100 text-blue-800 hover:bg-blue-200' : 'bg-gray-100 text-gray-800 border-b-2 border-gray-300';
+            const disabledClasses = 'opacity-60 cursor-default shadow-inner';
+            const interactiveClasses = 'cursor-pointer';
+
+            return (
+                <span
+                    onClick={!isAnswered ? onClick : undefined}
+                    className={`${baseClasses} ${sourceClasses} ${isAnswered ? disabledClasses : interactiveClasses}`}
+                >
+                    {word.text}
+                </span>
+            );
+        };
+
+        const RearrangeQuestion = ({ question, isAnswered, onSubmit, showMessage, questionIndex, isCorrect }) => {
+            const [sentenceWords, setSentenceWords] = React.useState([]);
+            
+            const initialSourceWords = React.useMemo(() => {
+                return [...question.words]
+                    .map((text) => ({ id: crypto.randomUUID(), text })) 
+                    .sort(() => Math.random() - 0.5);
+            }, [question]);
+
+            const [sourceWords, setSourceWords] = React.useState(initialSourceWords);
+
+            React.useEffect(() => {
+                setSourceWords(initialSourceWords);
+                setSentenceWords([]);
+            }, [initialSourceWords]);
+
+            const handleSelectWord = (word) => {
+                setSourceWords(prev => prev.filter(w => w.id !== word.id));
+                setSentenceWords(prev => [...prev, word]);
+            };
+
+            const handleReturnWord = (word) => {
+                setSentenceWords(prev => prev.filter(w => w.id !== word.id));
+                setSourceWords(prev => [...prev, word].sort((a, b) => initialSourceWords.findIndex(sw => sw.id === a.id) - initialSourceWords.findIndex(sw => sw.id === b.id)));
+            };
+
+            const handleSubmitClick = () => {
+                if (sentenceWords.length === 0) {
+                    showMessage('Vui lòng sắp xếp các từ!', 'info');
+                    return;
+                }
+                
+                const submitted = sentenceWords.map(w => w.text).join(' ').replace(/\s+([.,?!])/g, '$1').trim();
+                const normalize = (str) => str.replace(/’/g, "'").replace(/[.,?!]/g, '').replace(/\s+/g, ' ').toLowerCase().trim();
+                
+                const isCorrectResult = normalize(submitted) === normalize(question.correctAnswer);
+                onSubmit(submitted, isCorrectResult);
+            };
+
+            return (
+                <>
+                    <h3
+                        className="text-xl sm:text-2xl font-semibold mb-6 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: `${questionIndex + 1}. ${question.question.replace(/^\d+\.\s*/, '')}` }}
+                    />
+                    <div className="space-y-4">
+                        <div className={`min-h-[60px] p-3 border-2 rounded-xl shadow-inner flex flex-wrap gap-2 items-center transition duration-300 ${isAnswered ? (isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50') : 'border-blue-300 bg-blue-50 border-dashed'}`}>
+                            {sentenceWords.length === 0 && !isAnswered ? (
+                                <span className="text-gray-500 italic text-sm">Chạm vào các từ bên dưới để xây dựng câu trả lời...</span>
+                            ) : (
+                                sentenceWords.map(word => (
+                                    <WordBlock key={word.id} word={word} onClick={() => handleReturnWord(word)} isSource={false} isAnswered={isAnswered} />
+                                ))
+                            )}
+                        </div>
+                        
+                        <div className="min-h-[100px] p-4 bg-gray-100 rounded-xl shadow-md flex flex-wrap gap-2 items-center border border-gray-200">
+                            {sourceWords.map(word => (
+                                <WordBlock key={word.id} word={word} onClick={() => handleSelectWord(word)} isSource={true} isAnswered={isAnswered} />
+                            ))}
+                        </div>
+                        <button
+                            onClick={handleSubmitClick}
+                            disabled={isAnswered}
+                            className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300 hover:bg-green-700 mt-4 disabled:bg-gray-400 disabled:cursor-not-allowed active:scale-98"
+                        >
+                            Kiểm Tra
+                        </button>
+                    </div>
+                </>
+            );
+        };
+        
+        // --- Component: StartScreen.tsx ---
+        const StartScreen = ({ onStart, totalQuestions }) => {
+            const [name, setName] = React.useState('');
+
+            const handleStart = () => {
+                if (name.trim()) {
+                    onStart(name.trim());
+                }
+            };
+
+            const isButtonDisabled = name.trim() === '';
+
+            return (
+                <div className="fade-in text-center p-4">
+                    <header className="mb-8">
+                        <h1 className="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">BỘ ĐỀ ÔN IOE K8 SỐ: 02.1</h1>
+                        <p className="text-lg text-gray-500">Bộ đề luyện thi IOE dành cho khối 8</p>
+                    </header>
+                    <div className="max-w-md mx-auto bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                        <h2 className="text-2xl font-semibold mb-4 text-gray-700">Chào mừng bạn!</h2>
+                        <p className="text-gray-600 mb-6">Mỗi câu trả lời đúng được cộng 10 điểm. Bài thi có {totalQuestions} câu.</p>
+                        <div className="space-y-4">
+                            <label htmlFor="player-name" className="block text-sm font-medium text-gray-700 text-left">Nhập tên của bạn để bắt đầu:</label>
+                            <input
+                                type="text"
+                                id="player-name"
+                                placeholder="Tên người chơi"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-lg shadow-sm transition duration-150"
+                                maxLength={50}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                onKeyPress={(e) => e.key === 'Enter' && !isButtonDisabled && handleStart()}
+                            />
+                            <button
+                                onClick={handleStart}
+                                disabled={isButtonDisabled}
+                                className="w-full py-3 px-4 bg-blue-500 text-white font-bold rounded-xl shadow-lg transition duration-300 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-xl active:scale-98"
+                            >
+                                Bắt Đầu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+        
+        // --- Component: EndScreen.tsx ---
+        const EndScreen = ({ playerName, score, totalQuestions, onRestart, onReview }) => {
+            const maxScore = totalQuestions * 10;
+            const percentage = maxScore > 0 ? (score / maxScore) * 100 : 0;
+            
+            let encouragement = "Cố gắng hơn ở lần sau nhé!";
+            if (percentage >= 90) {
+                encouragement = "Xuất sắc! Bạn thật sự là một chuyên gia!";
+            } else if (percentage >= 70) {
+                encouragement = "Làm tốt lắm! Chỉ cần cố gắng thêm một chút nữa thôi.";
+            } else if (percentage >= 50) {
+                encouragement = "Khá tốt! Hãy tiếp tục ôn luyện nhé.";
+            }
+
+            return (
+                <div className="text-center fade-in p-4">
+                    <h2 className="text-3xl font-bold mb-2 text-green-600">🎉 Hoàn Thành! 🎉</h2>
+                    <p className="text-xl text-gray-700 mb-4">
+                        Chúc mừng, <span className="font-extrabold text-blue-600">{playerName}</span>!
+                    </p>
+                     <p className="text-lg text-gray-600 mb-6">{encouragement}</p>
+                    <div className="bg-white p-8 rounded-xl shadow-lg inline-block border border-gray-100">
+                        <p className="text-2xl font-semibold mb-8 text-gray-700">Điểm số cuối cùng:</p>
+                        <p className={`text-6xl font-black mb-10 text-blue-700`}>
+                            {score} / {maxScore}
+                        </p>
+                    </div>
+                    <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                        {onReview && (
+                             <button
+                                onClick={onReview}
+                                className="py-3 px-6 bg-yellow-500 text-white font-bold rounded-xl shadow-lg transition duration-300 hover:bg-yellow-600 text-lg active:scale-98"
+                            >
+                                Xem lại câu sai
+                            </button>
+                        )}
+                        <button
+                            onClick={onRestart}
+                            className="py-3 px-6 bg-blue-500 text-white font-bold rounded-xl shadow-lg transition duration-300 hover:bg-blue-600 text-lg active:scale-98"
+                        >
+                            Làm lại bài thi
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Component: ReviewScreen.tsx ---
+        const ReviewScreen = ({ incorrectAnswers, onBack }) => {
+            return (
+                <div className="fade-in">
+                    <header className="text-center mb-8">
+                        <h1 className="text-3xl sm:text-4xl font-extrabold text-yellow-600 mb-2">Ôn tập các câu sai</h1>
+                    </header>
+                    <div className="space-y-8">
+                        {incorrectAnswers.map(({ question, submittedAnswer }, index) => (
+                            <div key={index} className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                                <h3 className="text-xl sm:text-2xl font-semibold mb-4 leading-relaxed"
+                                    dangerouslySetInnerHTML={{ __html: `${index + 1}. ${question.question.replace(/^\d+\.\s*/, '')}` }}
+                                />
+                                {question.mediaType && <MediaDisplay question={question} showMessage={() => {}} />}
+                                <RationaleBox question={question} isCorrect={false} submittedAnswer={submittedAnswer} />
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mt-8 text-center">
+                        <button
+                            onClick={onBack}
+                            className="py-3 px-6 bg-blue-500 text-white font-bold rounded-xl shadow-lg transition duration-300 hover:bg-blue-600 text-lg active:scale-98"
+                        >
+                            Quay lại màn hình điểm
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+        
+        // --- Component: QuizScreen.tsx ---
+        const QuizScreen = ({ playerName, onEnd, totalQuestions, questionSet }) => {
+            const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
+            const [score, setScore] = React.useState(0);
+            const [isAnswered, setIsAnswered] = React.useState(false);
+            const [isCorrect, setIsCorrect] = React.useState(false);
+            const [submittedAnswer, setSubmittedAnswer] = React.useState('');
+            const [isHintVisible, setIsHintVisible] = React.useState(false);
+            const [message, setMessage] = React.useState(null);
+            const incorrectAnswersRef = React.useRef([]);
+
+            const currentQuestion = questionSet[currentQuestionIndex];
+
+            React.useEffect(() => {
+                incorrectAnswersRef.current = [];
+            }, [questionSet]);
+
+             React.useEffect(() => {
+                setIsAnswered(false);
+                setIsCorrect(false);
+                setSubmittedAnswer('');
+                setIsHintVisible(false);
+                setMessage(null);
+            }, [currentQuestionIndex]);
+            
+            const showMessage = (text, type) => {
+                setMessage({ text, type });
+            };
+
+            const handleSubmit = (answer, isAnswerCorrect) => {
+                if (isAnswered) return;
+                
+                setIsAnswered(true);
+                setSubmittedAnswer(answer);
+                setIsCorrect(isAnswerCorrect);
+
+                if (isAnswerCorrect) {
+                    setScore(prev => prev + 10);
+                    showMessage('CHÍNH XÁC! +10 điểm', 'success');
+                } else {
+                    showMessage('SAI RỒI! Hãy xem lại nhé.', 'error');
+                    incorrectAnswersRef.current.push({ question: currentQuestion, submittedAnswer: answer });
+                }
+            };
+
+            const handleNext = () => {
+                if (currentQuestionIndex < totalQuestions - 1) {
+                    setCurrentQuestionIndex(prev => prev + 1);
+                } else {
+                    onEnd(score, incorrectAnswersRef.current);
+                }
+            };
+
+            if (!currentQuestion) {
+                return <div className="text-center p-8">Đang tải câu hỏi...</div>;
+            }
+
+            const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+            
+            const renderQuestionComponent = () => {
+                const commonProps = {
+                    question: currentQuestion,
+                    isAnswered,
+                    onSubmit: handleSubmit,
+                    showMessage,
+                    questionIndex: currentQuestionIndex,
+                    isCorrect: isCorrect, 
+                };
+
+                if (currentQuestion.type === 'rearrange') {
+                    return <RearrangeQuestion {...commonProps} />;
+                }
+                if (currentQuestion.type === 'mc' || (currentQuestion.type === 'multimedia' && currentQuestion.options)) {
+                    return <MultipleChoiceQuestion {...commonProps} />;
+                }
+                if (currentQuestion.type === 'fill-in-the-blank' || (currentQuestion.type === 'multimedia' && !currentQuestion.options)) {
+                    return <FillInTheBlankQuestion {...commonProps} />;
+                }
+                
+                return <div className="text-red-500">Lỗi: Loại câu hỏi không xác định.</div>;
+            };
+
+            return (
+                <div className="fade-in">
+                    {message && <MessageBox message={message.text} type={message.type} />}
+                    <header className="text-center mb-8">
+                        <h1 className="text-3xl sm:text-4xl font-extrabold text-blue-600 mb-2">BỘ ĐỀ ÔN IOE K8 SỐ: 02.1</h1>
+                        <ProgressBar percentage={progressPercentage} />
+                    </header>
+
+                    <div className="flex justify-between items-center mb-6 py-2 px-4 bg-blue-50 rounded-xl shadow-inner border border-blue-100">
+                        <p className="text-sm sm:text-base font-medium text-blue-800">Người chơi: <span className="font-bold">{playerName}</span></p>
+                        <p className="text-sm sm:text-base font-medium text-blue-800">Điểm: <span className="text-xl font-extrabold text-red-600">{score}</span></p>
+                        <p className="text-sm sm:text-base font-medium text-blue-800">Câu: <span className="font-bold">{currentQuestionIndex + 1}/{totalQuestions}</span></p>
+                    </div>
+
+                    <div className="mb-8">
+                        {renderQuestionComponent()}
+                    </div>
+
+                    <div className="mt-8 border-t pt-6 flex justify-between items-center flex-wrap gap-4">
+                        <div className="relative">
+                            <button
+                                className="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 hover:bg-yellow-600 active:scale-95"
+                                onMouseEnter={() => setIsHintVisible(true)}
+                                onMouseLeave={() => setIsHintVisible(false)}
+                                onTouchStart={() => setIsHintVisible(true)}
+                                onTouchEnd={() => setIsHintVisible(false)}
+                            >
+                                Gợi ý
+                            </button>
+                            <div className={`absolute bottom-full mb-2 w-max max-w-[90vw] sm:max-w-sm p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded-xl shadow-lg transition-all duration-300 transform origin-bottom-left ${isHintVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}`}>
+                                <p className="font-semibold text-yellow-800">Gợi ý:</p>
+                                <p className="text-yellow-700">{currentQuestion.hint_vi || 'Không có gợi ý.'}</p>
+                            </div>
+                        </div>
+                        
+                        <button onClick={handleNext} disabled={!isAnswered} className="flex-grow py-3 px-4 bg-blue-500 text-white font-bold rounded-xl shadow-xl transition duration-300 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed active:scale-98">
+                            {currentQuestionIndex === totalQuestions - 1 ? 'Hoàn thành' : 'Câu tiếp theo'}
+                        </button>
+                    </div>
+
+                    {isAnswered && (
+                        <RationaleBox question={currentQuestion} isCorrect={isCorrect} submittedAnswer={submittedAnswer} />
+                    )}
+                </div>
+            );
+        };
+        
+        // --- Component: App.tsx ---
+        const App = () => {
+            const [gameState, setGameState] = React.useState('start');
+            const [playerName, setPlayerName] = React.useState('');
+            const [score, setScore] = React.useState(0);
+            const [shuffledQuestions, setShuffledQuestions] = React.useState([]);
+            const [incorrectAnswers, setIncorrectAnswers] = React.useState([]);
+
+            React.useEffect(() => {
+                const array = [...questions];
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                setShuffledQuestions(array);
+            }, []);
+
+            const handleStartQuiz = (name) => {
+                setPlayerName(name);
+                setScore(0);
+                setIncorrectAnswers([]);
+                setGameState('quiz');
+            };
+
+            const handleEndQuiz = (finalScore, mistakes) => {
+                setScore(finalScore);
+                setIncorrectAnswers(mistakes);
+                setGameState('end');
+            };
+            
+            const handleRestartQuiz = () => {
+                 const array = [...questions];
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                setShuffledQuestions(array);
+                setGameState('start');
+            };
+
+            const handleReview = () => {
+                setGameState('review');
+            };
+
+             const handleBackToEndScreen = () => {
+                setGameState('end');
+            };
+
+            const renderContent = () => {
+                switch (gameState) {
+                    case 'quiz':
+                        return <QuizScreen 
+                                    playerName={playerName} 
+                                    onEnd={handleEndQuiz} 
+                                    totalQuestions={shuffledQuestions.length}
+                                    questionSet={shuffledQuestions}
+                                />;
+                    case 'end':
+                        return <EndScreen 
+                                    playerName={playerName} 
+                                    score={score} 
+                                    totalQuestions={shuffledQuestions.length}
+                                    onRestart={handleRestartQuiz} 
+                                    onReview={incorrectAnswers.length > 0 ? handleReview : null}
+                                />;
+                    case 'review':
+                        return <ReviewScreen 
+                                    incorrectAnswers={incorrectAnswers}
+                                    onBack={handleBackToEndScreen}
+                                />;
+                    default:
+                         return <StartScreen onStart={handleStartQuiz} totalQuestions={questions.length} />;
+                }
+            };
+
+            return (
+                <div className="p-4 sm:p-8 flex justify-center items-start min-h-screen">
+                    <div className="w-full max-w-3xl bg-white rounded-xl shadow-2xl p-6 sm:p-8 md:p-10 border border-gray-100 min-h-[80vh]">
+                        {renderContent()}
+                    </div>
+                </div>
+            );
+        };
+        
+        // --- Entry point from index.tsx ---
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+
+    </script>
+</body>
+</html>
